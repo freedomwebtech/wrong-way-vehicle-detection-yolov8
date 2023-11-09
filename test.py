@@ -64,20 +64,12 @@ while True:
         x3,y3,x4,y4,id=bbox
         cx=x3
         cy=y4
-        result=cv2.pointPolygonTest(np.array(area1,np.int32),((cx,cy)),False)
-        if result >=0:
-           wup[id]=(cx,cy)
-        if id in wup:
-           result1=cv2.pointPolygonTest(np.array(area2,np.int32),((cx,cy)),False)
-           if result1>=0: 
-              cv2.circle(frame,(cx,cy),4,(255,0,0),-1)
-              cvzone.putTextRect(frame,f'{id}',(x3,y3),1,1)
-              cv2.rectangle(frame,(x3,y3),(x4,y4),(255,0,255),2)
-              if wrongway.count(id)==0:
-                 wrongway.append(id)
+        cv2.circle(frame,(cx,cy),4,(255,0,0),-1)
+        cvzone.putTextRect(frame,f'{id}',(x3,y3),1,1)
+        cv2.rectangle(frame,(x3,y3),(x4,y4),(255,0,255),2)
+             
     cv2.polylines(frame,[np.array(area1,np.int32)],True,(255,255,255),2)
-    cv2.polylines(frame,[np.array(area2,np.int32)],True,(255,255,255),2)
-    print(wrongway) 
+    cv2.polylines(frame,[np.array(area2,np.int32)],True,(255,255,255),2) 
     cv2.imshow("RGB", frame)
     if cv2.waitKey(1)&0xFF==27:
         break
